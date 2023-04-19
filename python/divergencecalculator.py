@@ -1,7 +1,5 @@
-#This file contains every function needed to extract the data from the provided text files and make some computations
-import numpy
-import matplotlib
-
+"""This file contains every function needed"""
+"""to extract the data from the provided text files and make some computations"""
 sensors=[]
 environments={}
 
@@ -9,23 +7,22 @@ environments={}
 #This function takes a text file as input and converts it to a dictionnary
 #where each key value pair represents a line of the file
 def readfiles(file1):
+    """Returns a dictionnary where the values represent a line in the file"""
     file1= 'D:\TextFiles/'+file1
-
     with open(file1,'r') as f:
         content = f.readlines()
     #print(content1)
-
     endcontent={}
     for i in range(len(content)):
         newcontent=content[i].strip()
         for j in range(len(newcontent)):
             endcontent[j]=newcontent.split(' ')
-
     return endcontent
 
 
 #This function counts the keyframes captured by the SLAM and compares it to the Ground Truth keyframes count
 def keyframedivergence(sensor, groundtruth):
+    """Returns the percentage of keyframes captured by the selected sensor"""
     sensorkf=len(sensor)
     groundtruthkf=len(groundtruth)
     return str(round((sensorkf/groundtruthkf)*100,2))+"%"
@@ -35,6 +32,7 @@ def keyframedivergence(sensor, groundtruth):
 #and compute the keyframedivergence and give a dictionnary where the key is the environment followed by the sensor
 #and the value is the result of the keyframedivergence function
 def allkfdivergence():
+    """Return a dictionnary with all the keyframes percentages"""
     final={}
     environmentsnames=list(environments.keys())
     for j in range(len(environmentsnames)):
@@ -47,6 +45,7 @@ def allkfdivergence():
 #Takes the first name of the type of the environment as a parameter
 # and returns a list containing the difference of percentage with climbing difficulty by 1 in a same environment type
 def difficultyleveldivergence(environment):
+    """Returns a list containig the difference of keyframe percentage of two different difficulties"""
     if(environment=='MH' or environment=='V1' or environment=='V2' ):
         allkfdivergencelist=allkfdivergence()
         percentage=[]
@@ -62,24 +61,28 @@ def difficultyleveldivergence(environment):
 
 #Takes two environment names of different difficulty levels and one sensor as parameters and returns the key frame difference of the two environments sensor
 def difficultylevelkfaccuracy(environmentname1, environmentname2,sensor):
+    """Returns the difference of the kf percentage of two difficulties of a specific sensor"""
     allkfdivergencelist=allkfdivergence()
     for i in range(len(allkfdivergencelist.keys())):
-            if(str(environmentname1+'_'+sensor) == str(list(allkfdivergencelist.keys())[i])):
-                result=abs(round(float(allkfdivergencelist[environmentname1+'_'+sensor][:len(allkfdivergencelist[environmentname1+'_'+sensor])-1])-float(allkfdivergencelist[environmentname2+'_'+sensor][:len(allkfdivergencelist[environmentname2+'_'+sensor])-1]),4))
+        if(str(environmentname1+'_'+sensor) == str(list(allkfdivergencelist.keys())[i])):
+            result=abs(round(float(allkfdivergencelist[environmentname1+'_'+sensor][:len(allkfdivergencelist[environmentname1+'_'+sensor])-1])-float(allkfdivergencelist[environmentname2+'_'+sensor][:len(allkfdivergencelist[environmentname2+'_'+sensor])-1]),4))
     return result
 
 def alldifficultylevelkfaccuracy():
+    """returns a dict of all the kf differences of all environnments"""
     difficultylevelkfaccuracy('MH01','MH03','mono')
 
 
 
 #check if sensor is mono, monoi, stereo, steroi, RGB
 def addsensors(sensor):
+    """adds a new sensor to the sensors list"""
     if(sensor=='mono'or sensor=='monoi'or sensor=='stereo' or sensor=='stereoi' or sensor=='RGB'):
         sensors.append(sensor)
 
 #implement check if difficulty is easy medium or difficult
 def addenvironments(environment,difficulty):
+    """adds a new environment to the environments list"""
     if(difficulty=='easy'or difficulty=='medium' or difficulty=='difficult'):
         environments[environment]=difficulty
 
