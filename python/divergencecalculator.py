@@ -2,13 +2,15 @@
 """to extract the data from the provided text files and make some computations"""
 sensors=[]
 environments={}
+import os
 
 
 #This function takes a text file as input and converts it to a dictionnary
 #where each key value pair represents a line of the file
 def readfiles(file1):
     """Returns a dictionnary where the values represent a line in the file"""
-    file1= 'D:\TextFiles/'+file1
+
+    file1= 'ressources/TextFiles/'+file1
     with open(file1,'r') as f:
         content = f.readlines()
     #print(content1)
@@ -70,7 +72,16 @@ def difficultylevelkfaccuracy(environmentname1, environmentname2,sensor):
 
 def alldifficultylevelkfaccuracy():
     """returns a dict of all the kf differences of all environnments"""
-    difficultylevelkfaccuracy('MH01','MH03','mono')
+    list1=[]
+    list2=[]
+    final={}
+    for i in range(4):
+        list1.append(difficultylevelkfaccuracy('MH01','MH05',sensors[i]))
+    final['MH']=list1
+    for j in range(4):
+        list2.append(difficultylevelkfaccuracy('V101','V102',sensors[j]))
+    final['V1']=list2
+    return final
 
 
 
@@ -102,6 +113,7 @@ print(allkfdivergence())
 #alldivergencedictsplitter(alldivergence())
 #
 # print(difficultyleveldivergence())
-difficultyleveldivergence('MH')
+#difficultyleveldivergence('MH')
 #difficultyleveldivergence('V1')
-print(difficultylevelkfaccuracy('V101','V102','mono'))
+#print(difficultylevelkfaccuracy('MH01','MH05','mono'))
+print(alldifficultylevelkfaccuracy())
