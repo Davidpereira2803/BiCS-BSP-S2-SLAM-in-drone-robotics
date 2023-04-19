@@ -1,3 +1,4 @@
+#This file contains every function needed to extract the data from the provided text files and make some computations
 import numpy
 import matplotlib
 
