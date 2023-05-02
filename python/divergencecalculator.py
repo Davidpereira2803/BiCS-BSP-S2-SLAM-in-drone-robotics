@@ -89,10 +89,10 @@ def kfgraph():
     plt.savefig("plot.pdf")
 
 def kfbargraph(environment):
-    left_coordinates=[89.84,90.62,89.06,89.84]
+    left_coordinates=kfenvironment(environment)
     heights=[20,40,80,100]
     bar_labels=['mono','monoi','stereo','stereoi']
-    plt.bar(left_coordinates,heights,tick_label=bar_labels,width=0.6,color=['red','black'])
+    plt.bar(left_coordinates,heights,tick_label=bar_labels,width=0.3,color=['red','black'])
     plt.xlabel('X-axis')
     plt.ylabel('Y-axis')
     plt.title("A simple bar graph")
@@ -102,7 +102,7 @@ def test():
     left_coordinates=[1.4,2.5,3.0,4.9,5.7]
     heights=[10,20,30,15,40]
     bar_labels=['One','Two','Three','Four','Five']
-    plt.bar(left_coordinates,heights,tick_label=bar_labels,width=0.6,color=['red','black'])
+    plt.bar(left_coordinates,heights,tick_label=bar_labels,width=0.3,color=['red','black'])
     plt.xlabel('X-axis')
     plt.ylabel('Y-axis')
     plt.title("A simple bar graph")
@@ -130,7 +130,7 @@ addsensors('mono')
 addsensors('monoi')
 addsensors('stereo')
 addsensors('stereoi')
-print(allkfdivergence())
+#print(allkfdivergence())
 #print(difficultyleveldivergence())
 # difficultyleveldivergence('MH')
 # difficultyleveldivergence('V1')
