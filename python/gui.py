@@ -37,10 +37,3 @@ button= customtkinter.CTkButton(master=frame, text="Get", command=initialize)
 button.pack(pady=12, padx= 10)
 
 root.mainloop()
-"""
-entry1= customtkinter.CTkEntry(master=frame, placeholder_text="user")
-entry1.pack(pady=12, padx= 10)
-
-entry2= customtkinter.CTkEntry(master=frame, placeholder_text="password",show="*")
-entry2.pack(pady=12, padx= 10)
-"""
