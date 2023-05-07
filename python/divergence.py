@@ -54,4 +54,14 @@ class DivergenceCalculator:
         for i, element in enumerate(allkfdivergencelist):
             final.append(float(element[:len(element)-1]))
         return final
+    
+    def kfenvironmenttoString(self, kf):
+        """jifj"""
+        result=""
+        for i, element in enumerate(kf):
+            if(i<len(kf)-1):
+                result= result+str(element)+", "
+            else:
+                result= result+str(element)
+        return result
 

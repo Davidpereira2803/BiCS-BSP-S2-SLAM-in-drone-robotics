@@ -18,15 +18,15 @@ class Main:
     
 
 
-
+"""
 #Example:
-main = Main()
-main.initializesensors("mono")
-main.initializesensors("monoi")
+#main = Main()
+#main.initializesensors("mono")
+#main.initializesensors("monoi")
 main.initializesensors("stereo")
 main.initializesensors("stereoi")
 main.initializeenvironments("MH01","easy")
 print(main.calculator.kfenvironment())
 gc.kfbargraph('MH01')
 gc.test()
-
+"""
