@@ -1,35 +1,33 @@
-#Main Graphical User Interface
+""""""
 
-import PySimpleGUI as gui
-import divergencecalculator as dc
+import customtkinter
 
-title=gui.Text(text="Outputted Graph",font=('Arial Bold',20),size=18)
-input=gui.Input('',enable_events=True, key='-INPUT-', font=('Arial Bold', 20), expand_x=True, justification='left')
+import os
+os.system('Xvfb :1 -screen 0 1600x1200x16  &')    # create virtual display with size 1600x1200 and 16 bit color. Color can be changed to 24 or 8
+os.environ['DISPLAY']=':1.0'
+customtkinter.set_appearance_mode("dark")
+customtkinter.set_default_color_theme("blue")
 
-layout=[[title],[gui.Text('Enter desired sensor'),input],[gui.Button("OK",key="-OK-")]]
-realsize=(1100,800)
+root = customtkinter.CTk()
 
+root.geometry("1000x1000")
 
-window= gui.Window("Sensors Benchmark Results",layout,size=realsize)
+def login():
+    print("hfhj")
 
-window.read()
+frame = customtkinter.CTkFrame(master=root)
+frame.pack(pady=20, padx=60, fill="both", expand=True)
 
+label= customtkinter.CTkLabel(master=frame,text="jfjfjf")
+label.pack(pady=12, padx=10)
 
-#def getdivergence():
+entry1= customtkinter.CTkEntry(master=frame, placeholder_text="user")
+entry1.pack(pady=12, padx= 10)
 
+entry2= customtkinter.CTkEntry(master=frame, placeholder_text="password",show="*")
+entry2.pack(pady=12, padx= 10)
 
+button= customtkinter.CTkButton(master=frame, text="login", command=login)
+entry2.pack(pady=12, padx= 10)
 
-
-while True:
-    event, values = window.read()
-    if event == '-INPUT-':
-        if values['-INPUT-'][-1] not in ('0123456789'):
-            gui.popup("Only digits allowed")
-            window['-INPUT-'].update(values['-INPUT-'][:-1])
-    if event == gui.WIN_CLOSED or event == 'Exit':
-      break
-
-
-
-
-window.close()
+root.mainloop()
