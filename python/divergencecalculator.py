@@ -1,6 +1,9 @@
 """This file contains every function needed"""
 """to extract the data from the provided text files and make some computations"""
 import matplotlib.pyplot as plt
+import graphcreator as gc
+
+
 sensors = []
 environments = {}
 
@@ -21,10 +24,10 @@ def readfiles(file1):
             endcontent[j] = newcontent.split(' ')
     return endcontent
 
-
 # This function counts the keyframes captured by the SLAM and compares it to the Ground Truth keyframes count
 def keyframedivergence(sensor, groundtruth):
     """Returns the percentage of keyframes captured by the selected sensor"""
+
     sensorkf = len(sensor)
     groundtruthkf = len(groundtruth)
     return str(round((sensorkf/groundtruthkf)*100, 2))+"%"
@@ -34,6 +37,7 @@ def keyframedivergence(sensor, groundtruth):
 # and the value is the result of the keyframedivergence function
 def allkfdivergence():
     """Return a dictionnary with all the keyframes percentages"""
+
     final = {}
     environmentsnames = list(environments.keys())
     for j in range(len(environmentsnames)):
@@ -44,7 +48,7 @@ def allkfdivergence():
                   ] = (keyframedivergence(readfiles(file1), readfiles(file2)))
     return final
 
-def kfenvironment(environment):
+def kfenvironment():
     allkfdivergencelist=list(allkfdivergence().values())
     final=[]
     for i in range(len(allkfdivergencelist)):
@@ -52,10 +56,9 @@ def kfenvironment(environment):
     return final
 
 # Takes two environment names of different difficulty levels and one sensor as parameters and returns the key frame difference of the two environments sensor
-
-
 def difficultylevelkfaccuracy(environmentname1, environmentname2, sensor):
     """Returns the difference of the kf percentage of two difficulties of a specific sensor"""
+
     result=0
     allkfdivergencelist = allkfdivergence()
     for i in range(len(allkfdivergencelist.keys())):
@@ -64,9 +67,9 @@ def difficultylevelkfaccuracy(environmentname1, environmentname2, sensor):
                 allkfdivergencelist[environmentname2+'_'+sensor][:len(allkfdivergencelist[environmentname2+'_'+sensor])-1]), 4))
     return result
 
-
 def alldifficultylevelkfaccuracy():
     """returns a dict of all the kf differences of all environnments"""
+
     list1 = []
     list2 = []
     final = {}
@@ -78,65 +81,18 @@ def alldifficultylevelkfaccuracy():
 
     return list1
 
-
-def kfgraph():
-    x=[89.84,90.62,89.06,89.84]
-    y=[2,4,6,1]
-    plt.plot(x,y)
-    plt.xlabel('X-axis')
-    plt.ylabel('Y-axis')
-    plt.title("A simple line graph")
-    plt.savefig("plot.pdf")
-
-def kfbargraph(environment):
-    left_coordinates=kfenvironment(environment)
-    heights=[20,40,80,100]
-    bar_labels=['mono','monoi','stereo','stereoi']
-    plt.bar(left_coordinates,heights,tick_label=bar_labels,width=0.3,color=['red','black'])
-    plt.xlabel('X-axis')
-    plt.ylabel('Y-axis')
-    plt.title("A simple bar graph")
-    plt.savefig("bargraph.pdf")
-
-def test():
-    left_coordinates=[1.4,2.5,3.0,4.9,5.7]
-    heights=[10,20,30,15,40]
-    bar_labels=['One','Two','Three','Four','Five']
-    plt.bar(left_coordinates,heights,tick_label=bar_labels,width=0.3,color=['red','black'])
-    plt.xlabel('X-axis')
-    plt.ylabel('Y-axis')
-    plt.title("A simple bar graph")
-    plt.savefig("bargraph.pdf")
-
 # check if sensor is mono, monoi, stereo, steroi, RGB
 def addsensors(sensor):
     """adds a new sensor to the sensors list"""
+
     if (sensor == 'mono' or sensor == 'monoi' or sensor == 'stereo' or sensor == 'stereoi' or sensor == 'RGB'):
         sensors.append(sensor)
 
 # implement check if difficulty is easy medium or difficulty
 def addenvironments(environment, difficulty):
     """adds a new environment to the environments list"""
+
     if (difficulty == 'easy' or difficulty == 'medium' or difficulty == 'difficult'):
         environments[environment] = difficulty
 
-
-
-#addenvironments('MH01', 'easy')
-#addenvironments('MH05', 'difficult')
-addenvironments('MH01', 'easy')
-
-addsensors('mono')
-addsensors('monoi')
-addsensors('stereo')
-addsensors('stereoi')
-#print(allkfdivergence())
-#print(difficultyleveldivergence())
-# difficultyleveldivergence('MH')
-# difficultyleveldivergence('V1')
-#print(difficultylevelkfaccuracy('V101','V102','mono'))
-#print(alldifficultylevelkfaccuracy().values())
-#kfbargraph("MH01")
-print(kfenvironment("MH01"))
-kfbargraph("MH01")
 
