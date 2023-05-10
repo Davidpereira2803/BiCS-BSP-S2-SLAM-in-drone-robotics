@@ -1,6 +1,5 @@
 """fff"""
-import graphcreator as gc
-import divergencecalculator as dc
+
 import divergence as d
 
 class Main:
@@ -16,17 +15,26 @@ class Main:
         """fjhjfj"""
         self.calculator.addenvironments(environment,difficulty)
     
+    def getsensors(self):
+        """ff"""
+        return self.calculator.sensors
 
+    def getenvironments(self):
+        """ff"""
+        return self.calculator.environments
 
-"""
-#Example:
-#main = Main()
-#main.initializesensors("mono")
-#main.initializesensors("monoi")
-main.initializesensors("stereo")
-main.initializesensors("stereoi")
-main.initializeenvironments("MH01","easy")
-print(main.calculator.kfenvironment())
-gc.kfbargraph('MH01')
-gc.test()
-"""
+    def removesensors(self,sensor):
+        """ff"""
+        for i in self.calculator.sensors:
+            if(sensor==i):
+                self.calculator.sensors.remove(i)
+        return self.calculator.sensors
+    
+    def removeenvironment(self,environment):
+        """ff"""
+        return self.calculator.environments.pop(environment)
+    
+    def getenvironmentsbyname(self,name):
+        """hfhfhf"""
+        return self.calculator.sensorkfbydifficultyincreasing(name)
+

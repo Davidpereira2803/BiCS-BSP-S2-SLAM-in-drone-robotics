@@ -7,7 +7,7 @@ class DivergenceCalculator:
 
     def addsensors(self,sensor):
         """adds a new sensor to the sensors list"""
-        if (sensor == 'mono' or sensor == 'monoi' or sensor == 'stereo' or sensor == 'stereoi' or sensor == 'RGB'):
+        if ((sensor == 'mono' or sensor == 'monoi' or sensor == 'stereo' or sensor == 'stereoi' or sensor == 'RGB') and not(sensor in self.sensors)):
             self.sensors.append(sensor)
 
     def addenvironments(self,environment, difficulty):
@@ -55,13 +55,30 @@ class DivergenceCalculator:
             final.append(float(element[:len(element)-1]))
         return final
     
-    def kfenvironmenttoString(self, kf):
+    def kfenvironmenttostring(self, kf):
         """jifj"""
         result=""
         for i, element in enumerate(kf):
             if(i<len(kf)-1):
-                result= result+str(element)+", "
+                result= result+str(element)+"%, "
             else:
-                result= result+str(element)
+                result= result+str(element)+"%"
         return result
 
+    def sensorkfbydifficultyincreasing(self,name):
+        """hfh"""
+        result=[]
+        for i, element in enumerate(self.environments):
+            if(element[:2]==name):
+                result.append(element)
+        return result
+
+"""
+d= DivergenceCalculator()
+d.addenvironments("MH01","easy")
+d.addenvironments("MH03","easy")
+d.addenvironments("MH05","easy")
+d.addsensors("mono")
+print(d.allkfdivergence())
+print(d.sensorkfbydifficultyincreasing("MH"))
+"""

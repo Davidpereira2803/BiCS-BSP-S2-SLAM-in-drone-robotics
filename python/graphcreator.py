@@ -1,35 +1,28 @@
 import matplotlib.pyplot as plt
-import divergencecalculator as dc
 import divergence as d
 
 
 calculator = d.DivergenceCalculator()
 
-def kfgraph():
-    x=[89.84,90.62,89.06,89.84]
-    y=[2,4,6,1]
-    plt.plot(x,y)
-    plt.xlabel('X-axis')
-    plt.ylabel('Y-axis')
-    plt.title("A simple line graph")
-    plt.savefig("plot.pdf")
-
 def kfbargraph(environment):
+    """jfjd"""
     left_coordinates= calculator.kfenvironment()
     heights=[20,40,80,100]
     bar_labels=['mono','monoi','stereo','stereoi']
     plt.bar(left_coordinates,heights,tick_label=bar_labels,width=0.5,color=['red','black'])
-    plt.xlabel('X-axis')
-    plt.ylabel('Y-axis')
-    plt.title("A simple bar graph")
-    plt.savefig("bargraph.pdf")
+    plt.xlabel('Sensors')
+    plt.ylabel('KeyFrame percentage')
+    plt.title(environment+" bar graph")
+    plt.savefig(environment+"_bargraph.pdf")
 
-def test():
-    left_coordinates=[1.4,2.5,3.0,4.9,5.7]
-    heights=[10,20,30,15,40]
-    bar_labels=['One','Two','Three','Four','Five']
-    plt.bar(left_coordinates,heights,tick_label=bar_labels,width=0.3,color=['red','black'])
-    plt.xlabel('X-axis')
-    plt.ylabel('Y-axis')
-    plt.title("A simple bar graph")
-    plt.savefig("bargraph.pdf")
+def kflinegraph(sensor,values,environments):
+    """jhgjh"""
+    y=[values[0],values[1],values[2]]
+    x=[environments[0],environments[1],environments[2]]
+    plt.plot(x,y)
+    plt.xlabel('Environments')
+    plt.ylabel('KeyFrame divergence percentage')
+    plt.title(sensor+" sensor line graph in the environments: "+str(environments))
+    plt.savefig(sensor+"_"+environments[0]+"_line.pdf")
+
+#kflinegraph("mono",[90,80,70],["MH01","MH03","MH05"])
