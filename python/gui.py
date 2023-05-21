@@ -1,4 +1,5 @@
-"""kjfgjkfjk"""
+"""GUI class, which is responsible for the graphical
+user interface and the interactions"""
 import subprocess
 import customtkinter
 import main as m
@@ -13,57 +14,63 @@ root = customtkinter.CTk()
 root.geometry("1000x1000")
 
 def autoinitialize():
-    """jij"""
+    """This function auto initializes the
+    lists with some examples"""
     main.initializesensors("mono")
     main.initializesensors("monoi")
     main.initializesensors("stereo")
     main.initializesensors("stereoi")
     main.initializeenvironments("MH01","easy")
+    main.initializeenvironments("MH03","medium")
+    main.initializeenvironments("MH05","difficult")
     print(main.getenvironments())
     showsensorsandenvironments()
 
-def kfgraphcalculator():
-    """fjjfej"""
-    gc.kfbargraph('MH01')
-    resultlabel.configure(text="Key Frame percentages: "+ main.calculator.kfenvironmenttostring(main.calculator.kfenvironment()))
-    path = 'MH01_bargraph.pdf'
+def kfbargraphcalculator():
+    """This function creates a bargraph of the
+    environment typed in the environment field"""
+    gc.kfbargraph(environmententry.get())
+    resultlabel.configure(text="Key Frame percentages: "
+    + main.calculator.kfenvironmenttostring(main.calculator.kfenvironment()))
+    path = environmententry.get()+'_bargraph.pdf'
     subprocess.Popen([path], shell=True)
     showsensorsandenvironments()
     linegraph()
 
 def linegraph():
-    """jfjf"""
-    gc.kflinegraph(sensorentry.get(),[90,80,70],["MH01","MH03","MH05"])
-    path = 'plot.pdf'
+    """This function creates a line graph
+    of the sensor currently in the sensors field"""
+    gc.kflinegraph(sensorentry.get(),environmententry.get(),[90,80,70],list(main.getenvironments().keys()))
+    path = sensorentry.get()+'_'+environmententry.get()+'_line.pdf'
     subprocess.Popen([path], shell=True)
     showsensorsandenvironments()
 
 def addsensor():
-    """vcjdfhj"""
+    """Adds the sensor written in the sensor entry to the list"""
     main.initializesensors(sensorentry.get())
     print(main.getsensors())
     showsensorsandenvironments()
 
 def removesensor():
-    """vcjdfhj"""
+    """Removes the sensor written in the sensor entry from the list"""
     main.removesensors(sensorentry.get())
     print(main.getsensors())
     showsensorsandenvironments()
 
 def addenvironment():
-    """jfjkn"""
+    """Adds the environment written in the environment/difficulty entry to the dictionnary"""
     main.initializeenvironments(environmententry.get(),environmentdifentry.get())
     print(main.getenvironments())
     showsensorsandenvironments()
 
 def removeenvironment():
-    """vcjdfhj"""
+    """Removes the environment written in the environment entry from the dictionnary"""
     main.removeenvironment(environmententry.get())
     print(main.getenvironments())
     showsensorsandenvironments()
 
 def showsensorsandenvironments():
-    """rrgg"""
+    """Shows the sensors/environments in a label"""
     sensors= str(main.getsensors())
     enviroments= str(main.getenvironments())
     result="You added the following sensors: "+sensors+"\n"+"You added the following environments: "+enviroments
@@ -103,7 +110,7 @@ label= customtkinter.CTkLabel(master=outputframe,
                             text="KeyFrame Divergence of the "+ "MH01" + " environment")
 label.pack(pady=1, padx=10)
 
-button= customtkinter.CTkButton(master=outputframe, text="Get", command=kfgraphcalculator)
+button= customtkinter.CTkButton(master=outputframe, text="Get", command=kfbargraphcalculator)
 button.pack(pady=5, padx= 10)
 
 resultlabel1= customtkinter.CTkLabel(master=outputframe,text="Empty")

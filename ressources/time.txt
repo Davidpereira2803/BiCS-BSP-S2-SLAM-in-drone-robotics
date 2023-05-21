@@ -1,0 +1,4 @@
+Times captured to perform the scanning:
+MH01, mono Time: 2.0409932136535645
+MH02, stereo Time: 1.786264419555664
+MH01, monoi Time: 3.1430325508117676

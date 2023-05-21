@@ -1,7 +1,9 @@
-"""hehjhdhj"""
+"""This class contains the methods needed to extract the information
+from the text documents and compute multiple divergence between sensors/environments"""
 
 class DivergenceCalculator:
-    """hfhejhf"""
+    """Class DivergenceCalculator, with a sensors list and environments dictionnary,
+    which contains the environment and its difficulty"""
     sensors=[]
     environments ={}
 
@@ -29,14 +31,12 @@ class DivergenceCalculator:
     
     def keyframedivergence(self,sensor, groundtruth):
         """Returns the percentage of keyframes captured by the selected sensor"""
-
         sensorkf = len(sensor)
         groundtruthkf = len(groundtruth)
         return str(round((sensorkf/groundtruthkf)*100, 2))+"%"
     
     def allkfdivergence(self):
         """Return a dictionnary with all the keyframes percentages"""
-
         final = {}
         environmentsnames = list(self.environments.keys())
         for i,elementj in enumerate(environmentsnames):
@@ -48,7 +48,7 @@ class DivergenceCalculator:
         return final
     
     def kfenvironment(self):
-        """ghfhfhbj"""
+        """Returns a list of only the values of the kf divergences"""
         allkfdivergencelist=list(self.allkfdivergence().values())
         final=[]
         for i, element in enumerate(allkfdivergencelist):
@@ -56,7 +56,7 @@ class DivergenceCalculator:
         return final
     
     def kfenvironmenttostring(self, kf):
-        """jifj"""
+        """Returns a string with the kf divergences in percentage"""
         result=""
         for i, element in enumerate(kf):
             if(i<len(kf)-1):
@@ -66,19 +66,25 @@ class DivergenceCalculator:
         return result
 
     def sensorkfbydifficultyincreasing(self,name):
-        """hfh"""
+        """Returns a list of environments per name, given as parameter"""
         result=[]
         for i, element in enumerate(self.environments):
             if(element[:2]==name):
                 result.append(element)
         return result
+    
+    def timetolist(self):
+        """This function extracts the information of the time.txt file
+        it returns a dictionnary containing the environment+sensor as key
+        and the time needed to perform the scanning in seconds as value"""
+        file='ressources/time.txt'
+        with open(file, 'r') as f:
+            content = f.readlines()
+            final={}
+        for indexi,elementi in enumerate(content):
+            if(indexi!=0):
+                newcontent = content[indexi].strip()
+                endcontent = newcontent.split(' ')
+                final[endcontent[0]+endcontent[1]]=endcontent[3]
+        return final
 
-"""
-d= DivergenceCalculator()
-d.addenvironments("MH01","easy")
-d.addenvironments("MH03","easy")
-d.addenvironments("MH05","easy")
-d.addsensors("mono")
-print(d.allkfdivergence())
-print(d.sensorkfbydifficultyincreasing("MH"))
-"""
