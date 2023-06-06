@@ -1,10 +1,10 @@
 """GUI class, which is responsible for the graphical
 user interface and the interactions"""
 
+import subprocess
 import customtkinter
 import main as m
 import graphcreator
-
 
 class Actions():
     """Class containing the functions triggered by the buttons"""
@@ -98,6 +98,13 @@ class Actions():
         result = "You added the following sensors: "+sensors+"\n" + \
             "\n"+"You added the following environments: "+enviroments
         listlabel.configure(text=result)
+
+    def getpdf(self):
+        """get the pdf of the selected environment and sensors SLAM output"""
+        path1='ressources\PDF\ '
+        path2=environmententry.get()+"_"+sensorentry.get()+".pdf"
+        subprocess.Popen([path1[:len(path1)-1]+path2],shell=True)
+
 
     def openwindow(self):
         """Open InformationWindow"""
@@ -233,5 +240,10 @@ listlabel.place(x=270, y=400)
 info_button= customtkinter.CTkButton(master=buttonframe,text="Open Information Window",command=action.openwindow)
 info_button.pack(pady=5, padx=10)
 info_button.place(x=412, y=200)
+
+"""Buttons to open Information Window"""
+pdf_button= customtkinter.CTkButton(master=buttonframe,text="Get SLAM PDF",command=action.getpdf)
+pdf_button.pack(pady=5, padx=10)
+pdf_button.place(x=412, y=250)
 
 root.mainloop()
