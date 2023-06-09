@@ -90,10 +90,10 @@ class TimeDivergenceCalculator:
 
     def percentage_greater(self, time_1, time_2):
         """time_1 > time_2,
-        it returns the percentage which time_1 is grater than time_2"""
+        it returns the percentage which time_1 is greater than time_2"""
         return ((time_1-time_2)/time_2)*100
 
     def percentage_less(self, time_1, time_2):
         """time_1 < time_2,
-        it returns the percentage which time_1 is grater than time_2"""
+        it returns the percentage which time_1 is less than time_2"""
         return ((time_2-time_1)/time_2)*100

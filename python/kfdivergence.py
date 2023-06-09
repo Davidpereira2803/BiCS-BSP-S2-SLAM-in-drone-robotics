@@ -52,8 +52,8 @@ class KFDivergenceCalculator:
         return round((sensorkf/groundtruthkf)*100, 2)
 
     def kf_environment(self, environment):
-        """Returns a list of only the values of the kf divergences
-        from the actual sensors and environments in the lists"""
+        """Returns a list of only the values of the kf divergences from the actual
+        sensors in the lists for the environment passed as parameter"""
         allkfdivergencelist = list(self.allkf_divergence().keys())
         final = []
         for i, element in enumerate(allkfdivergencelist):

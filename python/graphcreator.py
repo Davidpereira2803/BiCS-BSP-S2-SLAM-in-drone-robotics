@@ -46,7 +46,7 @@ class GraphCreator:
         plt.show()
 
     def time_linegraph(self, sensor):
-        """This function creates a line graph with the time difference
+        """This function creates a line graph with the time
         of a sensor in different environments"""
         values = (self.tcalculator.time_of_sensor(
             sensor, self.tcalculator.timedict()))
